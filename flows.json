@@ -1,0 +1,381 @@
+[
+    {
+        "id": "fa082436721532d6",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a9fbca252ccb782b",
+        "type": "modbustcp-read",
+        "z": "fa082436721532d6",
+        "name": "Reading registers",
+        "topic": "",
+        "dataType": "HoldingRegister",
+        "adr": "0",
+        "quantity": "5",
+        "rate": "5",
+        "rateUnit": "s",
+        "server": "704c8e3c607644e6",
+        "ieeeType": "off",
+        "ieeeBE": true,
+        "x": 330,
+        "y": 400,
+        "wires": [
+            [
+                "dd8caef7ed647664",
+                "1650959e07590ae5",
+                "b04395e358c6a565"
+            ]
+        ]
+    },
+    {
+        "id": "dd8caef7ed647664",
+        "type": "debug",
+        "z": "fa082436721532d6",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b04395e358c6a565",
+        "type": "change",
+        "z": "fa082436721532d6",
+        "name": "level",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[1]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 460,
+        "wires": [
+            [
+                "354fe243b938f597"
+            ]
+        ]
+    },
+    {
+        "id": "1650959e07590ae5",
+        "type": "change",
+        "z": "fa082436721532d6",
+        "name": "Temperature",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 400,
+        "wires": [
+            [
+                "d32340b82fe5a2c8"
+            ]
+        ]
+    },
+    {
+        "id": "d32340b82fe5a2c8",
+        "type": "ui_gauge",
+        "z": "fa082436721532d6",
+        "name": "",
+        "group": "4edcafdd62435d6d",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 750,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "354fe243b938f597",
+        "type": "ui_gauge",
+        "z": "fa082436721532d6",
+        "name": "",
+        "group": "4edcafdd62435d6d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "level",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 730,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b26f82efeb8bfbf5",
+        "type": "modbustcp-write",
+        "z": "fa082436721532d6",
+        "name": "",
+        "topic": "",
+        "dataType": "HoldingRegisters",
+        "adr": "0",
+        "server": "704c8e3c607644e6",
+        "x": 830,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "76d32a28a00b5b59",
+        "type": "function",
+        "z": "fa082436721532d6",
+        "name": "int at arrint",
+        "func": "msg.payload = [msg.payload]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 940,
+        "wires": [
+            [
+                "b26f82efeb8bfbf5"
+            ]
+        ]
+    },
+    {
+        "id": "91665287f0ee909c",
+        "type": "inject",
+        "z": "fa082436721532d6",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 520,
+        "y": 1100,
+        "wires": [
+            [
+                "9ba4f624a726a76b"
+            ]
+        ]
+    },
+    {
+        "id": "9ba4f624a726a76b",
+        "type": "NetworkIntf",
+        "z": "fa082436721532d6",
+        "name": "",
+        "x": 670,
+        "y": 1100,
+        "wires": [
+            [
+                "9edd3ee8866a5bba"
+            ]
+        ]
+    },
+    {
+        "id": "9edd3ee8866a5bba",
+        "type": "function",
+        "z": "fa082436721532d6",
+        "name": "int at arrint",
+        "func": "var obmsg = msg.payload.networkInterfaces;\nvar obInterface = {};\nvar MACs = [];\nvar i = 0;\nfor (var keyIf in obmsg){\n    obInterface = obmsg [keyIf];\n    MACs[i++] = 'MAC' + i + ' ' + obInterface[0].mac; \n}\nmsg.payload = MACs;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 1100,
+        "wires": [
+            [
+                "695af0904d4550e5",
+                "14d39df70e753fb6"
+            ]
+        ]
+    },
+    {
+        "id": "33905327f11aae1d",
+        "type": "ui_text",
+        "z": "fa082436721532d6",
+        "group": "4edcafdd62435d6d",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1170,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "baa1cab692af78e1",
+        "type": "ui_text",
+        "z": "fa082436721532d6",
+        "group": "4edcafdd62435d6d",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1170,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "695af0904d4550e5",
+        "type": "change",
+        "z": "fa082436721532d6",
+        "name": "level",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[0]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 1040,
+        "wires": [
+            [
+                "33905327f11aae1d"
+            ]
+        ]
+    },
+    {
+        "id": "14d39df70e753fb6",
+        "type": "change",
+        "z": "fa082436721532d6",
+        "name": "level",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload[1]",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 1100,
+        "wires": [
+            [
+                "baa1cab692af78e1"
+            ]
+        ]
+    },
+    {
+        "id": "704c8e3c607644e6",
+        "type": "modbustcp-server",
+        "name": "PLCSIM",
+        "host": "127.0.0.1",
+        "port": "502",
+        "unit_id": "1",
+        "reconnecttimeout": "10"
+    },
+    {
+        "id": "4edcafdd62435d6d",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "43b38fb9ee90cab9",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "43b38fb9ee90cab9",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
